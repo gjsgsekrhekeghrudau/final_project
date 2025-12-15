@@ -382,13 +382,6 @@
   </div>
 
   <script>
-    // ----------------------------
-    // Minimal ChatGPT-like UI + Interview helper actions
-    // Backend endpoints (optional):
-    // POST /api/chat       { messages: [{role,content}], mode, meta } -> { reply }
-    // POST /api/evaluate   { question, answer } -> { score, feedback }
-    // If no backend, demo mode generates mock answers.
-    // ----------------------------
 
     const elChat = document.getElementById("chat");
     const elInput = document.getElementById("input");
@@ -554,9 +547,7 @@
       return { content: data.reply ?? String(data), meta: data.meta };
     }
 
-    // ----------------------------
-    // DEMO LLM (mock)
-    // ----------------------------
+
     const demoState = {
       track: null,
       lastQuestion: null,
@@ -575,7 +566,6 @@
     }
 
     function scoreAnswer(q, a){
-      // very rough heuristic
       const len = (a||"").trim().length;
       let score = 3;
       if (len > 80) score = 5;
@@ -756,9 +746,6 @@ ${improved}
       return arr[idx];
     }
 
-    // ----------------------------
-    // Rendering
-    // ----------------------------
     function render(scrollToBottom=false){
       elChat.innerHTML = "";
 
@@ -786,7 +773,6 @@ ${improved}
         row.appendChild(avatar);
         row.appendChild(bubble);
 
-        // meta (e.g., score)
         if (m.role === "assistant" && m.meta && typeof m.meta.score === "number"){
           const meta = document.createElement("div");
           meta.className = "meta";
